@@ -13,7 +13,9 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+import { WalletDialogProvider, WalletMultiButton } from '@solana/wallet-adapter-material-ui';
+
+const pages = ['About', 'Contact Me'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const ResponsiveAppBar = () => {
@@ -57,7 +59,6 @@ const ResponsiveAppBar = () => {
           >
             I MINT, THEREFORE I AM
           </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
