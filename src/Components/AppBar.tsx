@@ -57,6 +57,7 @@ const ResponsiveAppBar = () => {
 
   function handleWalletDisconnect(event: any) {
     disconnect().catch(() => {});
+    handleCloseUserMenu();
   }
 
   return (
@@ -148,10 +149,10 @@ const ResponsiveAppBar = () => {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0, bgcolor: yellow[200] }}>
+          <Box sx={{ flexGrow: 0, bgcolor: "#556cd6" }}>
             <Tooltip title="Connect Wallet">
               <IconButton onClick={wallet?handleOpenUserMenu:handleWalletSelect} sx={{ p: 0 }}>
-                <Avatar sx={{ bgcolor: yellow[200] }}>
+                <Avatar sx={{ bgcolor: connected ? "#55D67F" : "#D6BF55" }}>
                   { wallet ? 
                     <WalletIcon wallet={wallet}/> :
                     <AiOutlineWallet/>
@@ -175,19 +176,17 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem onClick={publicKey?handleWalletDisconnect:handleWalletConnect}>
-                <Typography textAlign="center">
+              { publicKey ?
+                <MenuItem onClick={publicKey?handleWalletDisconnect:handleWalletConnect}>
+                  <Typography textAlign="center">
                   { publicKey ? 
                     "Disconnect Wallet" :
                     "Connect Wallet"
                   }
-                </Typography>
-              </MenuItem>
-              {/* {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))} */}
+                  </Typography>
+                </MenuItem> :
+                <></>
+              }
             </Menu>
           </Box>
         </Toolbar>
