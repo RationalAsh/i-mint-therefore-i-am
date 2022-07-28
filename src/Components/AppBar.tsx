@@ -64,7 +64,7 @@ const ResponsiveAppBar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <img alt="logo" src="imtia.jpeg" style={{width:"4rem", height: undefined, padding:8}}></img>
           <Typography
             variant="h6"
             noWrap
