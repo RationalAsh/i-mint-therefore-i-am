@@ -19,6 +19,7 @@ import { useMemo, useState } from 'react';
 
 import { AiOutlineWallet } from 'react-icons/ai'
 import { yellow } from '@mui/material/colors';
+import AboutDialog from './AboutDialog';
 
 const pages = ['About', 'Contact Me'];
 const settings = ['Connect Wallet'];
@@ -29,6 +30,7 @@ const ResponsiveAppBar = () => {
   const { publicKey, wallet, connect, connecting, connected, disconnect, disconnecting } = useWallet();
   const { setOpen } = useWalletDialog();
   const [anchor, setAnchor] = useState<HTMLElement>();
+  const [showAbout, setShowAbout] = useState(false);
 
   const base58 = useMemo(() => publicKey?.toBase58(), [publicKey]);
 
@@ -61,6 +63,7 @@ const ResponsiveAppBar = () => {
   }
 
   return (
+    <>
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -111,14 +114,16 @@ const ResponsiveAppBar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
+              <MenuItem onClick={() => setShowAbout(true)}>
+                  <Typography textAlign="center">About</Typography>
+              </MenuItem>
+              {/* {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
-              ))}
+              ))} */}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -130,6 +135,7 @@ const ResponsiveAppBar = () => {
               flexGrow: 1,
               fontFamily: 'monospace',
               fontWeight: 700,
+              fontSize: 16,
               letterSpacing: '.1rem',
               color: 'inherit',
               textDecoration: 'none',
@@ -138,7 +144,13 @@ const ResponsiveAppBar = () => {
             I MINT, THEREFORE I AM
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+          <Button
+                onClick={() => setShowAbout(true)}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                About
+          </Button>
+            {/* {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
@@ -146,13 +158,13 @@ const ResponsiveAppBar = () => {
               >
                 {page}
               </Button>
-            ))}
+            ))} */}
           </Box>
 
-          <Box sx={{ flexGrow: 0, bgcolor: "#556cd6" }}>
-            <Tooltip title="Connect Wallet">
+          <Box sx={{ flexGrow: 0, bgcolor: "#9945FF" }}>
+            <Tooltip title={connected?"Wallet Connected":"Connect Wallet"}>
               <IconButton onClick={wallet?handleOpenUserMenu:handleWalletSelect} sx={{ p: 0 }}>
-                <Avatar sx={{ bgcolor: connected ? "#55D67F" : "#D6BF55" }}>
+                <Avatar sx={{ bgcolor: connected ? "#14F195" : "#F11470" }}>
                   { wallet ? 
                     <WalletIcon wallet={wallet}/> :
                     <AiOutlineWallet/>
@@ -192,6 +204,8 @@ const ResponsiveAppBar = () => {
         </Toolbar>
       </Container>
     </AppBar>
+    <AboutDialog show={showAbout} setShow={setShowAbout}/>
+    </>
   );
 };
 export default ResponsiveAppBar;
