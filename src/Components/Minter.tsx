@@ -1,12 +1,17 @@
 import { Button, FilledInput, FormControl, FormHelperText, Grid, InputAdornment, InputLabel, TextField } from '@mui/material';
 import * as React from 'react';
 import { useState } from 'react';
+import { Nft } from "@metaplex-foundation/js";
+import { useMetaplex } from './useMetaplex';
+import { useConnection, useWallet } from '@solana/wallet-adapter-react';
+
 
 export interface IMinterProps {
 }
 
 export default function Minter (props: IMinterProps) {
     const [mintMessage, setMintMessage] = useState("");
+    const { metaplex } = useMetaplex() as any;
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         setMintMessage(event.target.value)
