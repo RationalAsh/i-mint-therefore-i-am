@@ -135,7 +135,7 @@ const ResponsiveAppBar = () => {
               flexGrow: 1,
               fontFamily: 'monospace',
               fontWeight: 700,
-              fontSize: 16,
+              fontSize: 10,
               letterSpacing: '.1rem',
               color: 'inherit',
               textDecoration: 'none',
@@ -191,7 +191,7 @@ const ResponsiveAppBar = () => {
               { publicKey ?
                 <MenuItem onClick={publicKey?handleWalletDisconnect:handleWalletConnect}>
                   <Typography textAlign="center">
-                  { publicKey ? 
+                  { connected ? 
                     "Disconnect Wallet" :
                     "Connect Wallet"
                   }

@@ -11,6 +11,9 @@ import React, { FC, ReactNode, useMemo } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import ResponsiveAppBar from './components/AppBar';
+import { Box, Container } from '@mui/material';
+import MintCard from './components/MintCard';
+import Minter from './components/Minter';
 
 const Context: FC<{ children: ReactNode }> = ({ children }) => {
   // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
@@ -26,7 +29,12 @@ const Context: FC<{ children: ReactNode }> = ({ children }) => {
   // of wallets that your users connect to will be loaded.
   const wallets = useMemo(
       () => [
-          new PhantomWalletAdapter()
+          new PhantomWalletAdapter(),
+          new SolanaMobileWalletAdapter(
+            {   appIdentity: {name: "I Mint, Therefore I Am"}, 
+                authorizationResultCache: createDefaultAuthorizationResultCache(),
+                cluster: network
+            })
       ],
       [network]
   );
@@ -46,6 +54,12 @@ const Content: FC = () => {
   return (
       <div className="App">
           <ResponsiveAppBar/>
+          <Container maxWidth='lg'>
+            <Minter/>
+            <MintCard/>
+            <MintCard/>
+          {/* <Box sx={{ height: '100vh' }} /> */}
+          </Container>
       </div>
   );
 };
