@@ -27,7 +27,24 @@ export default function Minter (props: IMinterProps) {
 
     // Function to mint the NFT
     function createProofOfExistence() {
-        
+        if (metaplex && publicKey) {
+            // Do the minting
+            console.log("Preparing to mint your NFT....");
+
+            // Show a notification to show that minting has started.
+            
+            try {
+                // Call function to create NFT.
+
+                // Show a notification to show that minting is done.
+            } catch (error: any) {
+                // Something went wrong with the minting
+                console.log(error);
+                // Show a notification describing the error.
+            }
+        } else {
+            // We should never come here but if it happens, express confusion.
+        }
     }
 
     return (
