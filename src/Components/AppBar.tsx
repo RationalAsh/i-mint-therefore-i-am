@@ -21,6 +21,8 @@ import { AiOutlineWallet } from 'react-icons/ai'
 import { yellow } from '@mui/material/colors';
 import AboutDialog from './AboutDialog';
 
+import imtia from '../images/imtia.jpeg'
+
 const pages = ['About', 'Contact Me'];
 const settings = ['Connect Wallet'];
 
@@ -67,7 +69,7 @@ const ResponsiveAppBar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <img alt="logo" src="imtia.jpeg" style={{width:"4rem", height: undefined, padding:8}}></img>
+          <img alt="logo" src={imtia} style={{width:"4rem", height: undefined, padding:8}}></img>
           <Typography
             variant="h6"
             noWrap

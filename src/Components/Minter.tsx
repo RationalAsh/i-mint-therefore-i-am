@@ -1,10 +1,11 @@
 import { Button, FilledInput, FormControl, FormHelperText, Grid, InputAdornment, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Tooltip } from '@mui/material';
 import * as React from 'react';
-import { useState } from 'react';
+import { MouseEventHandler, useState } from 'react';
 import { Nft } from "@metaplex-foundation/js";
 import { useMetaplex } from './useMetaplex';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { Pronoun } from '../data/Models';
+import { SnackbarProvider, VariantType, useSnackbar } from 'notistack'
 
 
 export interface IMinterProps {
@@ -15,6 +16,8 @@ export default function Minter (props: IMinterProps) {
     const [mintPronoun, setMintPronoun] = useState<Pronoun>(Pronoun.he);
     const { metaplex } = useMetaplex() as any;
     const { publicKey, wallet, connect, connecting, connected, disconnect, disconnecting } = useWallet();
+    // For notifications
+    const { enqueueSnackbar } = useSnackbar();
 
     function handleNameChange(event: React.ChangeEvent<HTMLInputElement>) {
         setMintMessage(event.target.value);
@@ -26,17 +29,19 @@ export default function Minter (props: IMinterProps) {
     }
 
     // Function to mint the NFT
-    function createProofOfExistence() {
+    function createProofOfExistence(event: any) {
         if (metaplex && publicKey) {
             // Do the minting
             console.log("Preparing to mint your NFT....");
 
             // Show a notification to show that minting has started.
+            enqueueSnackbar("Started mint!", { variant: 'info' });
             
             try {
                 // Call function to create NFT.
 
                 // Show a notification to show that minting is done.
+                enqueueSnackbar("Mint done!", { variant: 'success' });
             } catch (error: any) {
                 // Something went wrong with the minting
                 console.log(error);
@@ -89,7 +94,8 @@ export default function Minter (props: IMinterProps) {
             <Tooltip title="Connect wallet and enter a mint message to mint.">
             <span>
             <Button variant="contained"
-                    disabled={ !connected || mintMessage.length === 0 }>
+                    disabled={ !connected || mintMessage.length === 0 }
+                    onClick={createProofOfExistence}>
                 Mint!
             </Button>
             </span>

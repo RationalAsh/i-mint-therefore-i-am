@@ -15,6 +15,9 @@ import { Box, Container } from '@mui/material';
 import MintCard from './components/MintCard';
 import Minter from './components/Minter';
 
+import{ SnackbarProvider } from 'notistack'
+import { MetaplexProvider } from './components/MetaplexProvider';
+
 const Context: FC<{ children: ReactNode }> = ({ children }) => {
   // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
   // const network = WalletAdapterNetwork.Devnet;
@@ -40,13 +43,17 @@ const Context: FC<{ children: ReactNode }> = ({ children }) => {
   );
 
   return (
-      <ConnectionProvider endpoint={endpoint}>
-          <WalletProvider wallets={wallets} autoConnect>
-              <WalletDialogProvider>
-                  {children}
-              </WalletDialogProvider>
-          </WalletProvider>
-      </ConnectionProvider>
+        <SnackbarProvider maxSnack={5}>
+        <ConnectionProvider endpoint={endpoint}>
+            <WalletProvider wallets={wallets} autoConnect>
+                <WalletDialogProvider>
+                    <MetaplexProvider>
+                    {children}
+                    </MetaplexProvider>
+                </WalletDialogProvider>
+            </WalletProvider>
+        </ConnectionProvider>
+        </SnackbarProvider>
   );
 };
 
