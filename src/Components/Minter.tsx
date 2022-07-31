@@ -39,6 +39,10 @@ export default function Minter (props: IMinterProps) {
             
             try {
                 // Call function to create NFT.
+                // const response = await metaplex.nfts().create({
+                //     uri: "",
+                //     symbol: "BWH",
+                // });
 
                 // Show a notification to show that minting is done.
                 enqueueSnackbar("Mint done!", { variant: 'success' });
