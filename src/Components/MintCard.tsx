@@ -15,7 +15,7 @@ export default function MintCard() {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button size="small">View on Solana Explorer</Button>
       </CardActions>
     </Card>
   );

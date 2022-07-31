@@ -25,6 +25,11 @@ export default function Minter (props: IMinterProps) {
         setMintPronoun(Pronoun[event.target.value as keyof typeof Pronoun]);
     }
 
+    // Function to mint the NFT
+    function createProofOfExistence() {
+        
+    }
+
     return (
     <Grid container alignItems="center">
         <Grid item xs={10} md={4}>
