@@ -7,21 +7,20 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 
-import { useWalletDialog, WalletDialogProvider, WalletIcon, WalletMultiButton } from '@solana/wallet-adapter-material-ui';
+import { useWalletDialog } from '@solana/wallet-adapter-material-ui';
 import { useWallet } from '@solana/wallet-adapter-react';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
-import { AiOutlineWallet } from 'react-icons/ai'
 import { yellow } from '@mui/material/colors';
 import AboutDialog from './AboutDialog';
 
-import imtia from '../images/imtia.jpeg'
+import imtia from '../../img/imtia.jpeg'
+import brandLogo from '../../img/brand-logo.png'
+import WalletButton from '../wallet/WalletButton';
+import { useSnackbar } from 'notistack';
 
 const pages = ['About', 'Contact Me'];
 const settings = ['Connect Wallet'];
@@ -33,8 +32,25 @@ const ResponsiveAppBar = () => {
   const { setOpen } = useWalletDialog();
   const [anchor, setAnchor] = useState<HTMLElement>();
   const [showAbout, setShowAbout] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   const base58 = useMemo(() => publicKey?.toBase58(), [publicKey]);
+
+  // Notifications for wallet connections.
+  useEffect(() => {
+    if (connecting) {
+      enqueueSnackbar('Connecting to wallet ...', {variant: 'info', autoHideDuration: 3000});
+    }
+
+    if (connected) {
+      enqueueSnackbar('Wallet Connected!', {variant: 'success', autoHideDuration: 3000});
+    }
+  
+    return () => {
+      // Cleanup code goes here.
+    }
+  }, [connected, connecting])
+  
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -56,12 +72,13 @@ const ResponsiveAppBar = () => {
   }
 
   function handleWalletConnect(event: any) {
+    setAnchorElUser(null);
     connect().catch(()=> {});
   }
 
   function handleWalletDisconnect(event: any) {
+    setAnchorElUser(null);
     disconnect().catch(() => {});
-    handleCloseUserMenu();
   }
 
   return (
@@ -69,7 +86,7 @@ const ResponsiveAppBar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <img alt="logo" src={imtia} style={{width:"4rem", height: undefined, padding:8}}></img>
+          <img alt="logo" src={brandLogo} style={{width:"4rem", height: undefined, padding:8}}></img>
           <Typography
             variant="h6"
             noWrap
@@ -85,7 +102,7 @@ const ResponsiveAppBar = () => {
               textDecoration: 'none',
             }}
           >
-            I MINT, THEREFORE I AM
+            Ashwin's Solana Faucet
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -137,13 +154,13 @@ const ResponsiveAppBar = () => {
               flexGrow: 1,
               fontFamily: 'monospace',
               fontWeight: 700,
-              fontSize: 10,
-              letterSpacing: '.1rem',
+              fontSize: 12,
+              letterSpacing: '.08rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            I MINT, THEREFORE I AM
+            Ashwin's Solana Faucet
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
           <Button
@@ -163,45 +180,8 @@ const ResponsiveAppBar = () => {
             ))} */}
           </Box>
 
-          <Box sx={{ flexGrow: 0, bgcolor: "#9945FF" }}>
-            <Tooltip title={connected?"Wallet Connected":"Connect Wallet"}>
-              <IconButton onClick={wallet?handleOpenUserMenu:handleWalletSelect} sx={{ p: 0 }}>
-                <Avatar sx={{ bgcolor: connected ? "#14F195" : "#F11470" }}>
-                  { wallet ? 
-                    <WalletIcon wallet={wallet}/> :
-                    <AiOutlineWallet/>
-                  }
-                </Avatar>
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              { publicKey ?
-                <MenuItem onClick={publicKey?handleWalletDisconnect:handleWalletConnect}>
-                  <Typography textAlign="center">
-                  { connected ? 
-                    "Disconnect Wallet" :
-                    "Connect Wallet"
-                  }
-                  </Typography>
-                </MenuItem> :
-                <></>
-              }
-            </Menu>
+          <Box sx={{ flexGrow: 0 }}>
+              <WalletButton/>
           </Box>
         </Toolbar>
       </Container>
