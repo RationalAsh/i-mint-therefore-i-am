@@ -64,7 +64,7 @@ export default function AboutDialog(props: AboutDialogProps) {
             <Grid container alignItems="center" justifyContent="center">
               <Grid item xs={12} md={6}>
               <Typography variant="body1">
-              This is a React app that airdrops SOL to your testnet or devnet 
+              This is a React app that mints an NFT to represents your mark on the blockchain.  
               wallets. I made it to learn how to write apps that interact with Solana and to make it easier 
               to airdrop myself SOL for the many Solana projects I'm trying out. To find out more about me, 
               check out <Link rel="noreferrer" href="https://www.ashwinnarayan.com/" target="_blank">my home page</Link>.

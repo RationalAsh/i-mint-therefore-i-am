@@ -17,8 +17,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { yellow } from '@mui/material/colors';
 import AboutDialog from './AboutDialog';
 
-import imtia from '../../img/imtia.jpeg'
-import brandLogo from '../../img/brand-logo.png'
+import brandLogo from '../../img/imtia.jpeg'
 import WalletButton from '../wallet/WalletButton';
 import { useSnackbar } from 'notistack';
 
@@ -102,7 +101,7 @@ const ResponsiveAppBar = () => {
               textDecoration: 'none',
             }}
           >
-            Ashwin's Solana Faucet
+            I MINT, THEREFORE I AM
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -160,7 +159,7 @@ const ResponsiveAppBar = () => {
               textDecoration: 'none',
             }}
           >
-            Ashwin's Solana Faucet
+            I MINT, THEREFORE I AM
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
           <Button

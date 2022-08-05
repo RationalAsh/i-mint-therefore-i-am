@@ -2,7 +2,7 @@ import { Button, FilledInput, FormControl, FormHelperText, Grid, InputAdornment,
 import * as React from 'react';
 import { MouseEventHandler, useState } from 'react';
 import { Nft } from "@metaplex-foundation/js";
-import { useMetaplex } from './useMetaplex';
+import { useMetaplex } from './minting/useMetaplex';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { Pronoun } from '../data/Models';
 import { SnackbarProvider, VariantType, useSnackbar } from 'notistack'
