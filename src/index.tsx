@@ -5,16 +5,19 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
-import theme from './theme';
+import darkTheme from './themes/darktheme';
+import { SnackbarProvider } from 'notistack';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={darkTheme}>
+      <SnackbarProvider maxSnack={5}>
       <CssBaseline/>
       <App />
+      </SnackbarProvider>
     </ThemeProvider>
   </React.StrictMode>
 );
