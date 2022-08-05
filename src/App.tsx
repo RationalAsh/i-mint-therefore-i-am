@@ -1,22 +1,22 @@
 import { createDefaultAuthorizationResultCache, SolanaMobileWalletAdapter } from '@solana-mobile/wallet-adapter-mobile';
-import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
+import { WalletAdapterNetwork, WalletError } from '@solana/wallet-adapter-base';
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
 import { WalletDialogProvider, WalletMultiButton } from '@solana/wallet-adapter-material-ui';
 import {
     PhantomWalletAdapter,
 } from '@solana/wallet-adapter-wallets';
 import { clusterApiUrl } from '@solana/web3.js';
-import React, { FC, ReactNode, useMemo } from 'react';
+import React, { FC, ReactNode, useCallback, useMemo } from 'react';
 
 import logo from './logo.svg';
 import './App.css';
-import ResponsiveAppBar from './components/AppBar';
+import ResponsiveAppBar from './components/navigation/AppBar';
 import { Box, Container } from '@mui/material';
 import MintCard from './components/MintCard';
 import Minter from './components/Minter';
 
-import{ SnackbarProvider } from 'notistack'
-import { MetaplexProvider } from './components/MetaplexProvider';
+import{ useSnackbar } from 'notistack'
+import { MetaplexProvider } from './components/minting/MetaplexProvider';
 
 const Context: FC<{ children: ReactNode }> = ({ children }) => {
   // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
@@ -42,10 +42,18 @@ const Context: FC<{ children: ReactNode }> = ({ children }) => {
       [network]
   );
 
-  return (
-        <SnackbarProvider maxSnack={5}>
+    const { enqueueSnackbar } = useSnackbar();
+    const onError = useCallback(
+        (error: WalletError) => {
+            enqueueSnackbar(error.message ? `${error.name}: ${error.message}` : error.name, { variant: 'error' });
+            console.error(error);
+        },
+        [enqueueSnackbar]
+    );
+
+    return (
         <ConnectionProvider endpoint={endpoint}>
-            <WalletProvider wallets={wallets} autoConnect>
+            <WalletProvider wallets={wallets} autoConnect onError={onError}>
                 <WalletDialogProvider>
                     <MetaplexProvider>
                     {children}
@@ -53,8 +61,7 @@ const Context: FC<{ children: ReactNode }> = ({ children }) => {
                 </WalletDialogProvider>
             </WalletProvider>
         </ConnectionProvider>
-        </SnackbarProvider>
-  );
+    );
 };
 
 const Content: FC = () => {
