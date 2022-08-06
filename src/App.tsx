@@ -18,6 +18,7 @@ import Minter from './components/Minter';
 import{ useSnackbar } from 'notistack'
 import { MetaplexProvider } from './components/minting/MetaplexProvider';
 import MintForm from './components/minting/MintForm';
+import MintDisplay from './components/minting/MintDisplay';
 
 const Context: FC<{ children: ReactNode }> = ({ children }) => {
   // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
@@ -71,6 +72,7 @@ const Content: FC = () => {
           <ResponsiveAppBar/>
           <Stack alignItems='center' spacing={2} sx={{ mt: 2 }}>
             <MintForm/>
+            <MintDisplay/>
           </Stack>
       </div>
   );
