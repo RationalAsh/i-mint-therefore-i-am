@@ -11,6 +11,9 @@
 # production
 /build
 
+# Localhost testing
+/test-ledger
+
 # misc
 .DS_Store
 .env.local
