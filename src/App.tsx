@@ -11,12 +11,13 @@ import React, { FC, ReactNode, useCallback, useMemo } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import ResponsiveAppBar from './components/navigation/AppBar';
-import { Box, Container } from '@mui/material';
+import { Box, Container, Stack } from '@mui/material';
 import MintCard from './components/MintCard';
 import Minter from './components/Minter';
 
 import{ useSnackbar } from 'notistack'
 import { MetaplexProvider } from './components/minting/MetaplexProvider';
+import MintForm from './components/minting/MintForm';
 
 const Context: FC<{ children: ReactNode }> = ({ children }) => {
   // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
@@ -68,12 +69,9 @@ const Content: FC = () => {
   return (
       <div className="App">
           <ResponsiveAppBar/>
-          <Container maxWidth='lg'>
-            <Minter/>
-            <MintCard/>
-            <MintCard/>
-          {/* <Box sx={{ height: '100vh' }} /> */}
-          </Container>
+          <Stack alignItems='center' spacing={2} sx={{ mt: 2 }}>
+            <MintForm/>
+          </Stack>
       </div>
   );
 };

@@ -56,7 +56,7 @@ export default function AboutDialog(props: AboutDialogProps) {
                 About
               </Typography>
               <Button autoFocus color="inherit" onClick={() => props.setShow(false)}>
-                save
+                Done
               </Button>
             </Toolbar>
           </AppBar>
@@ -65,22 +65,38 @@ export default function AboutDialog(props: AboutDialogProps) {
               <Grid item xs={12} md={6}>
               <Typography variant="body1">
               This is a React app that mints an NFT to represents your mark on the blockchain.  
-              wallets. I made it to learn how to write apps that interact with Solana and to make it easier 
-              to airdrop myself SOL for the many Solana projects I'm trying out. To find out more about me, 
+              I made it to learn how to write apps that interact with SPL Token Library. To find out more about me, 
               check out <Link rel="noreferrer" href="https://www.ashwinnarayan.com/" target="_blank">my home page</Link>.
-              <p>This project is open source. Check out the code 
-              <Link href='https://github.com/RationalAsh/solana-faucet' target='_blank' rel='noreferrer'> here</Link></p>
+              
               </Typography>
 
               <Typography variant="h4">
               FAQ
               </Typography>
+
               <Typography variant="h5">
-              Why do I need to connect my wallet?
+              How does this app prove my existence?
               </Typography>
               <Typography variant="body1">
-              You do not need to. If you connect your wallet however, the website will auto-fill your public key for the airdrop.
+              If you minted an NFT using this website, it proves (to me, the author of this website) that you existed at
+              the moment you clicked the mint button. 
               </Typography>
+
+              <Typography variant="h5">
+              Do I exist?
+              </Typography>
+              <Typography variant="body1">
+              It is my opinion that if you minted an NFT on this website, you existed. 
+              But you could be a simulated consciousness. There's really no way to know. 
+              </Typography>
+
+              <Typography variant="h5">
+              Can I see the code?
+              </Typography>
+              <Typography variant="body1">
+              The code <Link href='https://github.com/RationalAsh/i-mint-therefore-i-am' target='_blank' rel='noreferrer'> exists.</Link>
+              </Typography>
+
               </Grid>
             </Grid>
           </Box>
