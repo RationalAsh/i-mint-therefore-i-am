@@ -1,4 +1,5 @@
-import { Button, Divider, IconButton, InputBase, Paper } from '@mui/material';
+import { Avatar, Button, Divider, IconButton, InputBase, Paper } from '@mui/material';
+import { deepOrange, deepPurple } from '@mui/material/colors';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import DirectionsIcon from '@mui/icons-material/Directions';
@@ -19,6 +20,25 @@ export default function MintForm (props: IMintFormProps) {
     const { enqueueSnackbar } = useSnackbar();
     const { metaplex } = useMetaplex() as any;
     const { publicKey, wallet, connect, connecting, connected, disconnect, disconnecting } = useWallet();
+
+    // Get intiials
+    function getInitials(name: string) {
+        const splitStr = name.split(" ");
+        
+        if (name.length > 0) {
+            if (splitStr.length > 1) {
+                const char1 = splitStr[0].length > 0 ? splitStr[0][0].toUpperCase() : "~";
+                const char2 = splitStr[1].length > 0 ? splitStr[1][0].toUpperCase() : "";
+                return ( char1 + char2 );
+            } 
+            
+            if (splitStr.length === 1) {
+                return splitStr[0].length > 0 ? splitStr[0][0].toUpperCase(): "~";
+            }
+        } else {
+            return "~"
+        }
+    }
 
     // Function to mint the NFT
     function createProofOfExistence(event: any) {
@@ -52,8 +72,15 @@ export default function MintForm (props: IMintFormProps) {
     return (
         <Paper
             component='form'
-            sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: "80%" }}
+            sx={{ p: '2px 4px',
+                  alignItems: 'center', 
+                  width: "80%",
+                  display: { xs: 'none', md: 'flex' } }}
             elevation={formFocused ? 5 : 2}>
+            <IconButton sx={{ p: "2px" }} aria-label='avatar-select'>
+                <Avatar sx={{ bgcolor: deepOrange[500] }}>{getInitials(minterName)}</Avatar>
+            </IconButton>
+            <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
             <InputBase
                 sx={{ ml: 1, width: "60%" }}
                 placeholder="Your Graffiti"
