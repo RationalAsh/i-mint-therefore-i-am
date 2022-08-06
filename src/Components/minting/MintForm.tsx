@@ -1,4 +1,4 @@
-import { Avatar, Button, Divider, IconButton, InputBase, Paper } from '@mui/material';
+import { Avatar, Button, Divider, IconButton, InputBase, Paper, Stack, TextField } from '@mui/material';
 import { deepOrange, deepPurple } from '@mui/material/colors';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
@@ -70,6 +70,7 @@ export default function MintForm (props: IMintFormProps) {
     }
 
     return (
+        <>
         <Paper
             component='form'
             sx={{ p: '2px 4px',
@@ -108,5 +109,46 @@ export default function MintForm (props: IMintFormProps) {
                 Mint!
             </Button>
         </Paper>
+        <Paper
+        component='form'
+        sx={{ p: '2px 4px',
+              alignItems: 'center', 
+              width: "80%",
+              display: { xs: 'flex', md: 'none' } }}
+        elevation={formFocused ? 5 : 2}>
+            <Stack spacing={2} sx={{width: "100%", m: '5px'}}>
+                <IconButton sx={{ p: "2px" }} aria-label='avatar-select'>
+                    <Avatar sx={{ bgcolor: deepOrange[500] }}>{getInitials(minterName)}</Avatar>
+                </IconButton>
+                <TextField 
+                    label="Your graffiti"
+                    variant='filled'
+                    fullWidth
+                    inputProps={{ 'aria-label': 'write some graffiti' }}
+                    onFocus={() => setFormFocused(true)}
+                    onBlur={() => setFormFocused(false)}
+                    value={mintMessage}
+                    onChange={(e) => setMintMessage(e.target.value)}/>
+                <TextField 
+                    label="Your name"
+                    variant='filled'
+                    fullWidth
+                    inputProps={{ 'aria-label': 'write some graffiti' }}
+                    onFocus={() => setFormFocused(true)}
+                    onBlur={() => setFormFocused(false)}
+                    value={minterName}
+                    onChange={(e) => setMinterName(e.target.value)}/>
+                <Button 
+                    color="primary" 
+                    sx={{ p: '10px' }} 
+                    aria-label="Mint"
+                    disabled={!connected || mintMessage.length === 0 || minterName.length === 0 }
+                    onClick={createProofOfExistence}
+                    fullWidth>
+                    Mint!
+                </Button>
+            </Stack>
+        </Paper>
+        </>
     );
 }
