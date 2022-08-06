@@ -9,17 +9,17 @@ import darkTheme from './themes/darktheme';
 import { SnackbarProvider } from 'notistack';
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+    document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <ThemeProvider theme={darkTheme}>
-      <SnackbarProvider maxSnack={5}>
-      <CssBaseline/>
-      <App />
-      </SnackbarProvider>
-    </ThemeProvider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <ThemeProvider theme={darkTheme}>
+            <SnackbarProvider maxSnack={5}>
+            <CssBaseline/>
+            <App />
+            </SnackbarProvider>
+        </ThemeProvider>
+    </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
