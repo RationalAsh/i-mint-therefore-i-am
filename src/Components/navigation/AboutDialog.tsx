@@ -69,7 +69,7 @@ export default function AboutDialog(props: AboutDialogProps) {
               check out <Link rel="noreferrer" href="https://www.ashwinnarayan.com/" target="_blank">my home page</Link>.
               
               </Typography>
-
+              <br/>
               <Typography variant="h4">
               FAQ
               </Typography>
@@ -81,7 +81,7 @@ export default function AboutDialog(props: AboutDialogProps) {
               If you minted an NFT using this website, it proves (to me, the author of this website) that you existed at
               the moment you clicked the mint button. 
               </Typography>
-
+              <br/>
               <Typography variant="h5">
               Do I exist?
               </Typography>
@@ -89,12 +89,29 @@ export default function AboutDialog(props: AboutDialogProps) {
               It is my opinion that if you minted an NFT on this website, you existed. 
               But you could be a simulated consciousness. There's really no way to know. 
               </Typography>
-
+              <br/>
               <Typography variant="h5">
               Can I see the code?
               </Typography>
               <Typography variant="body1">
               The code <Link href='https://github.com/RationalAsh/i-mint-therefore-i-am' target='_blank' rel='noreferrer'> exists.</Link>
+              </Typography>
+              <br/>
+              <Typography variant="h5">
+              What will this cost?
+              </Typography>
+              <Typography variant="body1">
+              Minting the NFT is free (like drawing graffiti). The only cost to minting this NFT is the fees 
+              for sending all the transactions to the Solana blockchain. You can liken this to the cost of public 
+              transport for reaching the wall on which you want to write on in the real world and the cost of the paint.
+              This cost is pretty low (less than a cent at the time of writing this). 
+              </Typography>
+              <br/>
+              <Typography variant="h5">
+              Will this website steal my SOL?
+              </Typography>
+              <Typography variant="body1">
+              I promise it won't, but you can check the code if you want to be sure. 
               </Typography>
 
               </Grid>

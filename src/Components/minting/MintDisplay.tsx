@@ -7,7 +7,7 @@ export interface IMintDisplayProps {
 export default function MintDisplay (props: IMintDisplayProps) {
     return (
         <>
-        <Typography variant='h3' sx={{ mt: '10px' }}>
+        <Typography variant='h3' sx={{ pt: '20px' }}>
             Graffiti Wall
         </Typography>
         <List sx={{ width: "100%", maxWidth: 500, bgcolor: 'background.paper' }}>
@@ -18,7 +18,7 @@ export default function MintDisplay (props: IMintDisplayProps) {
                 </ListItemAvatar>
             
             <ListItemText
-                primary="Brunch this weekend?"
+                primary="I think, therefore I am. Pretty obvious IMHO."
                 secondary={
                     <React.Fragment>
                     <Typography
@@ -27,9 +27,9 @@ export default function MintDisplay (props: IMintDisplayProps) {
                         variant="body2"
                         color="text.primary"
                     >
-                        Ali Connors
+                        René Descartes
                     </Typography>
-                    {" — I'll be in your neighborhood doing errands this…"}
+                    {"~ 1637"}
                     </React.Fragment>
                 }
                 />
