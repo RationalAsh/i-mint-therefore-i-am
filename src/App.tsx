@@ -12,8 +12,6 @@ import logo from './logo.svg';
 import './App.css';
 import ResponsiveAppBar from './components/navigation/AppBar';
 import { Box, Container, Stack } from '@mui/material';
-import MintCard from './components/MintCard';
-import Minter from './components/Minter';
 
 import{ useSnackbar } from 'notistack'
 import { MetaplexProvider } from './components/minting/MetaplexProvider';
